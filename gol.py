@@ -3,34 +3,15 @@ import pygame
 import time
 pygame.init()
 
-grid_gray =  (0,0,0)
+# Define Global Variables
+_GRIDSIZE = 25 *3
+_WINSIZE = 750
+grid_gray = (0,0,0)
+
+
 class Grid:
-    board = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    ]
+    global _GRIDSIZE    
+    board = [[0 for i in range(_GRIDSIZE + 2)] for j in range(_GRIDSIZE +2)]
     temp_board = board
 
     def __init__(self, rows, cols, width, height):
@@ -39,8 +20,6 @@ class Grid:
         self.width = width
         self.height = height
         self.cubes = [[Cube(self.board[i][j], i, j, width, height) for j in range(cols)] for i in range(rows)]
-        self.selected = None
-        self.model = None
 
     def draw(self, win):
         gap = self.width / self.rows
@@ -68,6 +47,7 @@ class Grid:
             return None
 
     def select(self, row, col):
+        # set active/dead cells in grid and cubes
         if self.cubes[row][col].value == 1:
             self.cubes[row][col].value = 0
             self.board[row][col] = 0
@@ -77,8 +57,8 @@ class Grid:
 
     def calc_next_state(self):
         #calculate temp 
-        print("Board:   ")
-        print(np.array(self.board))
+        #print("Board:   ")
+        #print(np.array(self.board))
         for i in range(len(self.cubes)-1):
             for j in range(len(self.cubes[i])-1):
                 #self.temp_board[i][j] = self.board[i][j]
@@ -108,8 +88,8 @@ class Grid:
                 # Set new state
                 self.temp_board[i][j] = next_state
                 
-        print("Temp_Board:")
-        print(np.array(self.temp_board))
+        #print("Temp_Board:")
+        #print(np.array(self.temp_board))
         
         # Pass new states to the cubes and to board then set temp back to 0 
         for i in range(len(self.temp_board)):
@@ -121,8 +101,8 @@ class Grid:
             for j in range(len(self.cubes[i])):
                 self.cubes[i][j].value = self.board[i][j]
 
-        print("Board2: ")
-        print(np.array(self.board))
+        #print("Board2: ")
+        #print(np.array(self.board))
 
 
                 
@@ -132,45 +112,47 @@ class Grid:
 
 
 class Cube:
-    rows = 18
-    cols = 18
+    global _GRIDSIZE    
+    global _WINSIZE
+    rows = _GRIDSIZE
+    cols = _GRIDSIZE
     def __init__(self, value, row, col, width, height):
         self.value = value
-        self.temp = 0
         self.row = row
         self.col = col
         self.width = width
         self.height = height
-        self.selected = False
 
     def draw(self, win):
-        fnt = pygame.font.SysFont("comicsans", 40)
-
         gap = self.width / self.rows
         x = self.col * gap
         y = self.row * gap
-#       if self.temp != 0 and self.value == 0:
-#            text = fnt.render(str(self.temp), 1, (128,128,128))
-#            win.blit(text, (x+5,y+5))
-#        elif not(self.value == 0) :
-#            text = fnt.render(str(self.value), 1, (0,0,0))
-#            win.blit(text, (x+gap/2 - text.get_width()/2, y+gap/2 - text.get_width()/2))
         if self.value == 1:
             pygame.draw.rect(win, (0,0,0), (x,y, gap ,gap))
 
 def  draw_window(win, board):
+    # Fll with background color
     win.fill((255, 255, 255))
-
-    fnt = pygame.font.SysFont("comicsans",40)
-
+    # Draw the board
     board.draw(win)
 
+
+
 def main():
-    win = pygame.display.set_mode((542,542))
+    # Set speed:
+    speed = int(input("Select Speed from 1 to 10: "))
+
+
+    # Set Window Settings
+    win = pygame.display.set_mode((_WINSIZE + 2,_WINSIZE + 2))
     pygame.display.set_caption("Conway's Game of Life")
+
+    # Variables displaying the current State 
     run = True
-    board = Grid(18,18,540,540)
     preperationphase = True
+
+    # Initialize the grid
+    board = Grid(_GRIDSIZE,_GRIDSIZE,_WINSIZE,_WINSIZE)
 
     # Main Loop
     while run:
@@ -178,19 +160,24 @@ def main():
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    #Quit
                     run = False
                 if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        #Quit
+                        run = False
                     if event.key == pygame.K_RETURN:
-                        print("Start Game")
-                        # preperationphase = False
+                        # Play one Generation
                         board.calc_next_state()
                     if event.key == pygame.K_SPACE:
+                        # Start 0 Player Game
                         preperationphase = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    # Set cell alive 
                     pos = pygame.mouse.get_pos()
                     clicked = board.click(pos)
                     board.select(clicked[0],clicked[1])
-
+            # Refresh Window
             draw_window(win, board)
             pygame.display.update()
         else: #Game play phase 
@@ -198,21 +185,22 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        run = False
+                    if event.key == pygame.K_SPACE:
+                        # Pause 0 Player Game
+                        preperationphase = True
             # delay 
-            pygame.time.wait(500)
-            # calculate temp state
+            pygame.time.wait( int(2000 / speed))
+            #Calculate and update State:
             board.calc_next_state()
-            # quit()
-            # Update states 
-            #
-            # reset temp state
-            #
-            #
-            # Draw updated Window
+            # Update Window
             draw_window(win, board)
             pygame.display.update()
-            
-        pygame.display.update()
+        
 
-main()
+
+if __name__ == "__main__":
+    main()
 
